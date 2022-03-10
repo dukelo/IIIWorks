@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-family: 'Roboto', Helvetica, Arial, sans-serif;
+            color: #2c3e50;
+        }
+
+        .Sectionsetting{
+            max-width: 700px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-align: center;
+            padding-top: 0.5rem;
+            background-color: #ecf0f1;
+            border: solid #dfe6e9;
+            border-radius: 0.75rem;
+        }
+
+        .s {
+            filter: grayscale(1);  /*沒有任何色彩的黑白影像*/
+            
+        }
+
+        .n {
+            filter: grayscale(0);  /*顏色不變*/
+        }
+    </style>
+</head>
+<body>
+    <section id="ids" class="Sectionsetting">
+
+        <img id="idstar0" class="idstars s" alt="" src="Images/star.jpg">
+        <img id="idstar1" class="idstars s" alt="" src="Images/star.jpg">
+        <img id="idstar2" class="idstars s" alt="" src="Images/star.jpg">
+        <img id="idstar3" class="idstars s" alt="" src="Images/star.jpg">
+        <img id="idstar4" class="idstars s" alt="" src="Images/star.jpg">
+        <h1 id="total">評分為....5</h1>
+
+    </section>
+
+    <script>
+
+        let stars=document.getElementsByClassName("idstars");
+
+        for(star of stars){
+            star.addEventListener("click",Click);
+            star.addEventListener("dblclick",Dblclick);
+        }
+
+        function Click(){
+            document.getElementById(`${this.id}`).className="idstars n";
+
+            count=0;
+            for(let i=0;i<stars.length;i++){
+                if(document.getElementById("idstar"+(i)).className=="idstars n"){
+                    count++;
+                }
+            }
+            document.getElementById("total").innerHTML=`你給${count}顆星`;
+        }
+
+        function Dblclick(){
+            document.getElementById(`${this.id}`).className="idstars s";
+
+            var count=0;
+            for(let i=0;i<stars.length;i++){
+                if(document.getElementById("idstar"+(i)).className=="idstars n"){
+                    count++;
+                }
+            }
+            document.getElementById("total").innerHTML=`你給${count}顆星`;
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-family: 'Roboto', Helvetica, Arial, sans-serif;
+            color: #2c3e50;
+            box-sizing: border-box;
+        }
+
+        fieldset{
+            background-color: #ecf0f1;
+            max-width: 700px;
+            margin: 0 auto;
+            border: solid #dfe6e9;
+            border-radius: 0.75rem;
+            padding-top: 0.5rem;
+        }
+
+        legend{
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        div{
+            padding-top: 0.5rem;
+            text-align: center;
+        }
+
+        .n{
+            width: 13px;
+            height: 13px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .s{
+            width: 15px;
+            height: 15px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <fieldset>
+            <legend>
+                National Park
+            </legend>
+            <div>
+                <a id="linka" href="https://www.spnp.gov.tw/" target="_blank"><img id="imga" src="Images/0.jpg" alt="" 
+                    width="600px" height="300px"></a>
+            </div>
+            <div style="margin-top: 0.5rem; padding-top: 0.1rem;">
+                <img id="n0" src="Images/n0.png" class="n" alt="">
+                <img id="n1" src="Images/n1.png" class="n" alt="">
+                <img id="n2" src="Images/n2.png" class="n" alt="">
+                <img id="n3" src="Images/n3.png" class="n" alt="">
+                <img id="n4" src="Images/n4.png" class="n" alt="">
+                <img id="n5" src="Images/n5.png" class="n" alt="">
+                <img id="n6" src="Images/n6.png" class="n" alt="">
+                <img id="n7" src="Images/n7.png" class="n" alt="">
+                <img id="n8" src="Images/n8.png" class="n" alt="">
+            </div>
+            <div style="margin-top: 0.5rem; padding-top: 0.1rem;">
+                <img id="c1" src="Images/previous.png" style="padding-right: 10px; padding: left 10px" alt="" width="26px" height="26px">
+                <img id="c2" class="pause" src="Images/pause.png" style="padding-right: 10px; padding: left 10px" alt="" width="26px" height="26px">
+                <img id="c3" src="Images/fast-forward.png" style="padding-right: 10px; padding: left 10px" alt="" width="26px" height="26px">
+            </div>
+        </fieldset>
+    </section>
+
+    <script>
+
+
+        let link=new Array();
+        link[0]="https://www.spnp.gov.tw/";
+        link[1]="https://www.ymsnp.gov.tw/";
+        link[2]="https://www.taroko.gov.tw/";
+        link[3]="https://www.ysnp.gov.tw/";
+        link[4]="https://www.tjnp.gov.tw/";
+        link[5]="https://www.ktnp.gov.tw/";
+        link[6]="https://www.kmnp.gov.tw/";
+        link[7]="https://www.marine.gov.tw/index.php";
+        link[8]="http://tcra.goodays.cc:8097/zh-tw/";
+
+        var count=0;
+        document.getElementById("c2").addEventListener("click",Click);
+        document.getElementById("c1").addEventListener("click",ClickC1);
+        document.getElementById("c3").addEventListener("click",ClickC3)
+
+        function setClock(){
+            for(let i=0;i<9;i++){
+                document.getElementById(`n${i}`).className="n" 
+            }
+            document.getElementById(`n${count}`).className="s"
+            document.getElementById("linka").href=link[count];
+            document.getElementById("imga").src=`Images/${count}.jpg`;
+            count++;
+            if(count==9){
+                count=0;
+            }
+        }
+
+        let intervalID=window.setInterval(setClock,1000);
+
+        function Click(){
+            if(document.getElementById("c2").className=="pause"){
+                document.getElementById("c2").className="play";
+                document.getElementById("c2").src="Images/play.png";
+                clearInterval(intervalID); 
+            }else if(document.getElementById("c2").className=="play"){
+                document.getElementById("c2").className="pause";
+                document.getElementById("c2").src="Images/pause.png";
+                intervalID=window.setInterval(setClock,1000);
+            }
+        }
+
+        function ClickC1(){
+            if(document.getElementById("c2").className=="play"){
+                count--;
+                if(count<0){
+                    count=8;
+                }
+                for(let i=0;i<9;i++){
+                document.getElementById(`n${i}`).className="n" 
+                }
+                document.getElementById(`n${count}`).className="s"
+                document.getElementById("linka").href=link[count];
+                document.getElementById("imga").src=`Images/${count}.jpg`;
+            }
+        }
+
+        function ClickC3(){
+            if(document.getElementById("c2").className=="play"){
+                count++;
+                if(count>8){
+                count=0;
+                }
+                for(let i=0;i<9;i++){
+                document.getElementById(`n${i}`).className="n" 
+                }
+                document.getElementById(`n${count}`).className="s"
+                document.getElementById("linka").href=link[count];
+                document.getElementById("imga").src=`Images/${count}.jpg`;
+            }
+        }
+    </script>
+</body>
+</html>
